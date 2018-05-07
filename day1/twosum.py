@@ -24,11 +24,23 @@ class Solution:
                 if nums[i] + nums[j] == target:
                     return [i, j]
 
-    # def twoSum2(self, nums, target):
-    #     l = range(len(nums))
-    #     d = dict(zip(l, nums))
-    #     # print(d)
-    #     for i in l:
+    def twoSum2(self, nums, target):
+        range_num = range(len(nums))
+        d = dict(zip(nums, range_num))
+        # print(d)
+        for i in range_num:
+            complement = target - nums[i]
+            if complement in d and d.get(complement) != i:
+                return [i, d.get(complement)]
+
+    def twoSum3(self, nums, target):
+        range_num = range(len(nums))
+        d = dict()
+        for i in range_num:
+            complement = target - nums[i]
+            if complement in d:
+                return [d.get(complement), i]
+            d[nums[i]] = i
 
 
 startTime = time()
@@ -36,7 +48,7 @@ print(startTime)
 s = Solution()
 nums = [2, 7, 11, 15]
 target = 9
-solution = s.twoSum1(nums, target)
+solution = s.twoSum3(nums, target)
 endTime = time()
 print(endTime)
 print('solution:{}\nspend:{}'.format(solution, endTime-startTime))
