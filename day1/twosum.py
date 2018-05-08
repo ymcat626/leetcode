@@ -17,6 +17,7 @@ class Solution:
         :type nums: List[int]
         :type target: int
         :rtype: List[int]
+        通过两个循环把nums的元素迭代一遍，找出和等于target的两个值。
         """
         length = len(nums)
         for i in range(length):
@@ -25,6 +26,11 @@ class Solution:
                     return [i, j]
 
     def twoSum2(self, nums, target):
+        '''
+        以nums中的元素为key,角标作为value创建字典d
+        循环迭代，找出target-nums[i]（即另一个数），是否存在于字典d的key中，同时要保证相对应的value不能是i
+
+        '''
         range_num = range(len(nums))
         d = dict(zip(nums, range_num))
         # print(d)
@@ -34,6 +40,12 @@ class Solution:
                 return [i, d.get(complement)]
 
     def twoSum3(self, nums, target):
+        '''
+        思路同第二种方法类似，不同的是直接创建空的字典d
+        每次迭代都对complement是否存在于d中判断，若没有则在d中创建d[nums[i]] = i
+        这种做法，可以省去把nums作为key创建字典这一步，减少一次遍历，同时把字典的创建放在了判断的循环中
+
+        '''
         range_num = range(len(nums))
         d = dict()
         for i in range_num:
@@ -44,12 +56,12 @@ class Solution:
 
 
 startTime = time()
-print(startTime)
+print('startTime:{}'.format(startTime))
 s = Solution()
 nums = [2, 7, 11, 15]
 target = 9
 solution = s.twoSum3(nums, target)
 endTime = time()
-print(endTime)
+print('endTime:{}'.format(endTime))
 print('solution:{}\nspend:{}'.format(solution, endTime-startTime))
 
