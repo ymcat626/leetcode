@@ -27,7 +27,7 @@ class Solution:
         maxArea = 0
         for i in range(len(height) - 1):
             for j in range(i + 1, len(height)):
-                maxArea = max(height[i], height[j]) * (j - i)
+                maxArea = max(maxArea, min(height[i], height[j]) * (j - i))
                 # if height[i] < height[j]:
                 #     temp = (j - i) * height[i]
                 # else:
@@ -45,5 +45,23 @@ class Solution:
         :type height: List[int]
         :rtype: int
         """
+        maxArea = 0
+        leftNum = 0
+        rightNum = len(height) - 1
+        while leftNum < rightNum:
+            maxArea = max(maxArea, min(height[leftNum], height[rightNum]) * (rightNum - leftNum))
+            if height[leftNum] < height[rightNum]:
+                leftNum += 1
+            else:
+                rightNum -= 1
 
         return maxArea
+
+
+def test():
+    solution = Solution()
+    print(solution.maxArea2([1, 2]))
+
+
+if __name__ == '__main__':
+    test()
