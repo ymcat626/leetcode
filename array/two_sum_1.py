@@ -12,7 +12,7 @@ return [0, 1].
 
 
 class Solution:
-    def twoSum1(self, nums, target):
+    def two_sum1(self, nums, target):
         """
         :type nums: List[int]
         :type target: int
@@ -25,7 +25,7 @@ class Solution:
                 if nums[i] + nums[j] == target:
                     return [i, j]
 
-    def twoSum2(self, nums, target):
+    def two_sum2(self, nums, target):
         '''
         以nums中的元素为key,角标作为value创建字典d
         循环迭代，找出target-nums[i]（即另一个数），是否存在于字典d的key中，同时要保证相对应的value不能是i
@@ -39,7 +39,7 @@ class Solution:
             if complement in d and d.get(complement) != i:
                 return [i, d.get(complement)]
 
-    def twoSum3(self, nums, target):
+    def two_sum3(self, nums, target):
         '''
         思路同第二种方法类似，不同的是直接创建空的字典d
         每次迭代都对complement是否存在于d中判断，若没有则在d中创建d[nums[i]] = i
@@ -60,7 +60,7 @@ print('startTime:{}'.format(startTime))
 s = Solution()
 nums = [2, 7, 11, 15]
 target = 9
-solution = s.twoSum3(nums, target)
+solution = s.two_sum3(nums, target)
 endTime = time()
 print('endTime:{}'.format(endTime))
 print('solution:{}\nspend:{}'.format(solution, endTime-startTime))

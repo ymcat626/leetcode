@@ -19,48 +19,48 @@ class Solution:
     # 面积 = （角标i - 角标n）* min（height[i], height[n]）
     # 第一种做法：从最左边开始，依次遍历每一种可能，比较大小，直到找到最大值。
     # 由于两次迭代，时间复杂度O(n*n)
-    def maxArea1(self, height):
+    def max_area1(self, height):
         """
         :type height: List[int]
         :rtype: int
         """
-        maxArea = 0
+        max_area = 0
         for i in range(len(height) - 1):
             for j in range(i + 1, len(height)):
-                maxArea = max(maxArea, min(height[i], height[j]) * (j - i))
+                max_area = max(max_area, min(height[i], height[j]) * (j - i))
                 # if height[i] < height[j]:
                 #     temp = (j - i) * height[i]
                 # else:
                 #     temp = (j - i) * height[j]
-                # if maxArea < temp:
-                #     maxArea = temp
-        return maxArea
+                # if max_area < temp:
+                #     max_area = temp
+        return max_area
 
     # 第二种做法：从两边开始判断，第一次求出最左边和最右边所构成的四边形面积，若l_height < r_height,
     # 说明最左边的点和其他所有的点形成的四边形都不可能比和最右边点形成的四边形面积大，故此最左边点可以抛弃。
     # 左边点角标加1
     # 这种算法优化了遍历，可以在一次遍历就完成目标。时间复杂度为O(n)
-    def maxArea2(self, height):
+    def max_area2(self, height):
         """
         :type height: List[int]
         :rtype: int
         """
-        maxArea = 0
-        leftNum = 0
-        rightNum = len(height) - 1
-        while leftNum < rightNum:
-            maxArea = max(maxArea, min(height[leftNum], height[rightNum]) * (rightNum - leftNum))
-            if height[leftNum] < height[rightNum]:
-                leftNum += 1
+        max_area = 0
+        left_num = 0
+        right_num = len(height) - 1
+        while left_num < right_num:
+            max_area = max(max_area, min(height[left_num], height[right_num]) * (right_num - left_num))
+            if height[left_num] < height[right_num]:
+                left_num += 1
             else:
-                rightNum -= 1
+                right_num -= 1
 
-        return maxArea
+        return max_area
 
 
 def test():
     solution = Solution()
-    print(solution.maxArea2([1, 2]))
+    print(solution.max_area2([1, 2]))
 
 
 if __name__ == '__main__':
