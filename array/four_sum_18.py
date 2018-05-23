@@ -20,22 +20,28 @@ A solution set is:
 class Solution:
     def four_sum(self, nums, target):
         nums.sort()
-        res = set()
+        res = []
         for i in range(len(nums) - 3):
-            for j in range(i + 1, len(nums) - 2):
-                l = i + 1
-                r = len(nums) - 1
+            if i == 0 or i > 0 and nums[i] != nums[i - 1]:
+                for j in range(i + 1, len(nums) - 2):
+                    if j == i + 1 or j > i + 1 and nums[j] != nums[j - 1]:
+                        l = j + 1
+                        r = len(nums) - 1
+                        while l < r:
+                            sum = nums[i] + nums[j] + nums[l] + nums[r]
+                            if sum == target:
+                                res.append((nums[i], nums[j], nums[l], nums[r]))
+                                r -= 1
+                                l += 1
+                                while l < r and nums[l] == nums[l - 1]:
+                                    l += 1
+                                while r > l and nums[r] == nums[r + 1]:
+                                    r -= 1
 
-                while l < r:
-                    sum = nums[i] + nums[j] + nums[l] + nums[r]
-                    if sum == target:
-                        res.add((nums[i], nums[j], nums[l], nums[r]))
-                        r -= 1
-                        l += 1
-                    elif sum > target:
-                        r -= 1
-                    else:
-                        l += 1
+                            elif sum > target:
+                                r -= 1
+                            else:
+                                l += 1
         return res
 
 
@@ -46,4 +52,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
